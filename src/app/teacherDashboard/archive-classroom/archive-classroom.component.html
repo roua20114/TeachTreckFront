@@ -1,0 +1,12 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+    <h2>Archive Classroom</h2>
+    <form (ngSubmit)="archiveClassroom()">
+      <div class="form-group">
+        <label for="classroomId">Classroom ID:</label>
+        <input type="text" id="classroomId" [(ngModel)]="classroomId" name="classroomId" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Archive Classroom</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,17 @@
+<div class="container mt-5" *ngIf="exam">
+    <h3>{{ exam.title }}</h3>
+    <p><strong>Description:</strong> {{ exam.description }}</p>
+  
+    <div *ngFor="let question of exam.question; let i = index" class="mt-4">
+      <h5>Question {{ i + 1 }}: {{ question.question }}</h5>
+  
+      <ul class="list-group mt-2">
+        <li *ngFor="let option of question.options" class="list-group-item">
+          {{ option.optionText }}
+        </li>
+      </ul>
+  
+      <p class="text-success mt-2"><strong>Answer:</strong> {{ question.answer }}</p>
+    </div>
+  </div>
+  

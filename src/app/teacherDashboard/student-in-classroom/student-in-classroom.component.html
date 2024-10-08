@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>Students in Classroom</h2>
+    <form (ngSubmit)="getStudents()">
+      <div class="form-group">
+        <label for="classroomCode">Classroom Code:</label>
+        <input type="text" id="classroomCode" [(ngModel)]="classroomCode" name="classroomCode" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Get Students</button>
+    </form>
+    <div *ngIf="students.length > 0">
+      <h3>Students</h3>
+      <ul>
+        <li *ngFor="let student of students">{{ student }}</li>
+      </ul>
+    </div>
+  </div>
+  

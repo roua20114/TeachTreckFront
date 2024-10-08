@@ -1,0 +1,10 @@
+<app-sidebar></app-sidebar>
+<div>
+    <h2>My Courses qare </h2>
+    <ul>
+      <li *ngFor="let course of courses">
+        {{ course.title }} - {{ course.description }}- {{ course.courseType }} 
+      </li>
+    </ul>
+  </div>
+  

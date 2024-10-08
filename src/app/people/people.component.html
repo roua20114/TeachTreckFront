@@ -1,0 +1,193 @@
+<app-sidebar></app-sidebar>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Separating the student list from the sidebar */
+    .container-fluid {
+      margin-left: 240px; /* Add margin to separate from the sidebar */
+      padding-top: 20px;  /* Add padding to separate from the header */
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px 20px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #343a40;
+    }
+
+    .btn-primary {
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .card {
+      border: none;
+      background-color: #f8f9fa;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border: none;
+      border-bottom: 1px solid #e0e0e0;
+      transition: background-color 0.2s ease;
+    }
+
+    .list-group-item:hover {
+      background-color: #f1f3f5;
+    }
+
+    .list-group-item button {
+      background-color: #dc3545;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      padding: 8px 15px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .list-group-item button:hover {
+      background-color: #c82333;
+      box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+    }
+
+    .alert-danger {
+      margin-top: 20px;
+      color: white;
+      background-color: #f44336;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .text-muted {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container-fluid {
+        margin-left: 0; /* Reset margin on smaller screens */
+        padding-top: 15px;
+      }
+
+      .container {
+        padding: 20px 10px;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+
+    <!-- Sidebar Section -->
+    <app-sidebar></app-sidebar>
+
+    <div class="body-wrapper">
+      <app-header-admin></app-header-admin>
+
+      <!-- Main Content -->
+      <div class="container-fluid">
+        <div class="container my-5">
+
+          <!-- Header with Add Button -->
+         
+         
+          <!-- Loading Indicator -->
+          <div *ngIf="isLoading">
+            <p>Loading students...</p>
+          </div>
+          
+          <h2>Students List</h2>
+          <button mat-fab color="primary" (click)="openInviteDialog()" class="btn btn-primary">
+            <span>+</span>
+          </button>
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            <p>{{ errorMessage }}</p>
+          </div>
+
+          <!-- Students List -->
+          <div *ngIf="!isLoading && !errorMessage">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Approved</h5>
+                <ul class="list-group">
+                  <li *ngFor="let student of students" class="list-group-item">
+                    {{ student }}
+                    <button (click)="deleteStudent(student)">Remove</button>
+                  </li>
+                </ul>
+                <ng-template #noStudents>
+                  <p class="text-muted">No students found in this classroom.</p>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Edit Classroom Name</h2>
+  <form (ngSubmit)="saveClassroomName()">
+    <div class="form-group">
+      <label for="name">New Classroom Name:</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="classroomName" name="name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

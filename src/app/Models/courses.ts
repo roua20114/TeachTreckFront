@@ -1,8 +1,14 @@
+import { Classroom } from "./classroom";
+
 export class Courses {
-    id?: string;
-    title?: string;
-    description?: string;
-    courseType?: string;
-    courseFile?: string;
+    courseId!: string;
+    title!: string;
+    description!: string;
+    courseType!: string;
+    filePath!: string;
+    classroom!:Classroom;
+    classroomId!:string;
     teacher: any;
+    // comments!: any[];
+    
 }

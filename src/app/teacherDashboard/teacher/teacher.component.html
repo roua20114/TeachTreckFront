@@ -1,0 +1,47 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="/./assets/css/styles.min.css" />
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+      data-sidebar-position="fixed" data-header-position="fixed">
+      <app-sidebar></app-sidebar>
+      <div class="body-wrapper">
+        <app-header-admin></app-header-admin>
+        <div class="col-lg-8 d-flex align-items-stretch">
+          <div class="card w-100">
+            <div class="card-body">
+              <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                  <h5 class="card-title fw-semibold">Sales Overview</h5>
+                </div>
+                <div>
+                  <select class="form-select">
+                    <option value="1">March 2023</option>
+                    <option value="2">April 2023</option>
+                    <option value="3">May 2023</option>
+                    <option value="4">June 2023</option>
+                  </select>
+                </div>
+              </div>
+              <div id="chart"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Router outlet to render the child routes -->
+        <router-outlet></router-outlet>
+        
+        
+      
+      </div>
+    </div>
+  </body>
+</html>
+  

@@ -1,0 +1,190 @@
+
+<app-sidebar></app-sidebar>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/./assets/css/styles.min.css" />
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px; /* Increased max width for a wider layout */
+    }
+
+    .profile-cover {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .activity-feed {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .dots-menu {
+      cursor: pointer;
+    }
+
+    .btn-group .dropdown-menu {
+      right: 0;
+      left: auto;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="body-wrapper">
+          <app-header-admin></app-header-admin>
+        
+
+            <div class="container-fluid">
+              <div class="container-fluid">
+            
+
+            <div class="container my-5">
+              <app-navbar></app-navbar>
+              <div class="row">
+                <div class="col-lg-12 mx-auto">
+                
+
+                  <div class="profile-cover">
+                    <img src="/./assets/images/course_1.jpg" alt="Classroom Image" class="img-fluid rounded-circle mb-3" style="width: 150px;" />
+                    <h3 class="h3">{{ classroom.name }}</h3>
+                    <p><strong>{{ classroom.code }}</strong> - Code</p>
+                  </div>
+
+                  <div class="activity-feed">
+                    <h3 class="panel-title">Activity Feed</h3>
+                    <form [formGroup]="post" (ngSubmit)="onSubmit()">
+                      <textarea name="content" placeholder="Share what you've been up to..." 
+                                class="form-control mb-3" formControlName="content">
+                      </textarea>
+                      
+                      <div class="actions d-flex justify-content-between">
+                      
+                        <button type="submit" class="btn btn-sm btn-rounded btn-info">Post</button>
+                      </div>
+                    </form>
+                    <ul class="panel-activity__list mt-3 list-group">
+                      <li *ngFor="let post of posts" class="list-group-item mb-4 p-4 shadow-sm bg-white rounded">
+                        <!-- Post Content -->
+                        <div class="activity__list__body mb-3">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <strong class="text-primary">{{ post.username }}</strong> <br>
+                            <strong class="post-content" style="font-size: 1.1rem;">{{ post.content }}</strong>
+                            <small class="text-muted">{{ post.createdAt | date: 'short' }}</small>
+                          </div>
+                        </div>
+                    
+                        <!-- Comment Section -->
+                        <div class="comments-section">
+                          <!-- Display Comments for the Post -->
+                          <div *ngFor="let comment of post.comments" class="media mb-3">
+                            <div class="media-body">
+                              <div class="comment bg-light p-2 rounded">
+                                <strong class="text-primary">{{ comment.username }}</strong> 
+                               
+                                <p class="mt-1 mb-0">{{ comment.content }}</p>
+                              </div>
+                              <small class="text-muted">{{ comment.createdAt | date: 'short' }}</small>
+                            </div>
+                          </div>
+                        </div>
+                    
+                        <!-- Comment Form -->
+                        <div class="list-group-item p-0 border-0">
+                          <form [formGroup]="commentForm" (ngSubmit)="submitComment(post.id)" class="mt-3">
+                            <div class="form-group">
+                              <textarea formControlName="content" placeholder="Add your comment..." class="form-control" rows="2"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm mt-2">Add Comment</button>
+                          </form>
+                        </div>
+                      </li>
+                    </ul>
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    <ul class="panel-activity__list mt-3 list-group">
+                     
+                      <li *ngFor="let course of courses" class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="activity__list__body">
+                          <strong>{{course.teacher.username}}</strong><br>
+                          <strong>{{ course.title }}</strong>
+                          <p>{{ course.description }}</p>
+                          <a [href]="getFileUrl(course.filePath)" target="_blank" download>
+                            {{ getFileName(course.filePath) || 'Download File' }}
+                          </a>
+                        </div>
+                        <div class="btn-group dots-menu">
+                          <button type="button" class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v"></i>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" routerLink="/classroom/{{course.classroom.id}}/course/{{course.courseId}}/edit">Edit</a></li>
+                            <li><a class="dropdown-item text-danger" (click)="deleteCourse(course.courseId)">Delete</a></li>
+                            <li><a class="dropdown-item" href="#">Copy link</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="card my-4">
+                    <div class="card-body">
+                      <h5 class="card-title">Add a Course</h5>
+                      <form [formGroup]="courseForm" (ngSubmit)="onSubmitt()">
+                        <div class="mb-3">
+                          <label for="title" class="form-label">Title</label>
+                          <input type="text" class="form-control" formControlName="title" placeholder="Title" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="description" class="form-label">Description</label>
+                          <textarea class="form-control" formControlName="description" placeholder="Description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Upload your course:</label>
+                          <input type="file" class="form-control" formControlName="filePath" (change)="onFileChange($event)" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="courseType" class="form-label">Course Type</label>
+                          <input type="text" class="form-control" formControlName="courseType" placeholder="Course Type" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

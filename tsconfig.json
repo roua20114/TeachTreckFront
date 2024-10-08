@@ -12,6 +12,8 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
+    "noImplicitAny": false,      // If you have this enabled, it could lead to issues
+    "strictNullChecks": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",

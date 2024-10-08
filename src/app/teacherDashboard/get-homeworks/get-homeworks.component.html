@@ -1,0 +1,7 @@
+<div class="container">
+    <h2>Homeworks</h2>
+    <ul>
+      <li *ngFor="let homework of homeworks">{{ homework.title }} - {{ homework.description }} (Due: {{ homework.dueDate | date }})</li>
+    </ul>
+  </div>
+  

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="/./assets/css/styles.min.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section {
+      padding: 60px 0;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin-bottom: 40px;
+    }
+
+    .about-section {
+      background-color: #f4f6f9;
+    }
+
+    h3.dark-color {
+      color: #333;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    h6.theme-color {
+      color: #6c63ff;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #666;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    mark {
+      background-color: #ffeb3b;
+      padding: 0 5px;
+      border-radius: 3px;
+    }
+
+    .about-list {
+      margin-top: 30px;
+    }
+
+    .media {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .media label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .media p {
+      margin: 0;
+      color: #555;
+    }
+
+    .about-avatar img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-avatar input {
+      margin-top: 15px;
+    }
+
+    .about-avatar button {
+      margin-top: 10px;
+      background-color: #6c63ff;
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .about-avatar button:hover {
+      background-color: #5a54e2;
+    }
+
+    .counter {
+      margin-top: 50px;
+    }
+
+    .count-data {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .count {
+      color: #6c63ff;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .count-data p {
+      margin: 0;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .col-lg-6, .col-lg-3 {
+      flex: 1 1 50%; /* For wider devices */
+      padding: 15px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .col-lg-6 {
+        flex: 1 1 100%; /* For smaller devices */
+      }
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper" id="main-wrapper">
+    <!-- Sidebar Start -->
+    
+    <!-- Sidebar End -->
+
+    <div class="body-wrapper">
+      <!-- Header Start -->
+      <app-header-admin></app-header-admin>
+      <!-- Header End -->
+
+      <!-- About Section -->
+      <section class="section about-section gray-bg" id="about">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6">
+              <div class="about-text go-to">
+                <h3 class="dark-color">About Me</h3>
+                <div class="row about-list">
+                  <div class="col-md-6">
+                    
+                    <div class="media">
+                      <label>Age</label>
+                      <p>22 Yr</p>
+                    </div>
+                    <div class="media">
+                      <label>Residence</label>
+                      <p>Canada</p>
+                    </div>
+                    <div class="media">
+                      <label>Address</label>
+                      <p>{{profileinfo.address}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="media">
+                      <label>E-mail</label>
+                      <p>{{profileinfo.email}}</p>
+                    </div>
+                    <div class="media">
+                      <label>Phone</label>
+                      <p>{{profileinfo.mobile}}</p>
+                    </div>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="about-avatar">
+               
+                <img *ngIf="ProfilePictureUrl" [src]="ProfilePictureUrl" title="Profile Picture" alt="Profile Picture">
+               
+                <p *ngIf="!ProfilePictureUrl">No profile picture available</p>
+              </div>
+            </div>
+          </div>
+        
+         
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>

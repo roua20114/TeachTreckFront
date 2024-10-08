@@ -8,27 +8,29 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<User | null>;
-  public currentUser: Observable<User | null>;
-  private baseUrl = 'http://localhost:8080/public/authentication-resources';
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
+  private baseUrl = 'http://localhost:8081/public/authentication-resources';
+  private tokenKey = 'jwtToken';
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser');
-    const initialUser = storedUser ? JSON.parse(storedUser) : null;
-    this.currentUserSubject = new BehaviorSubject<User | null>(initialUser);
+    
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')!));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): User | null {
+  public get currentUserValue(): any{
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(`${this.baseUrl}/login`, { username, password })
+  login(email: string, password: string) {
+    return this.http.post<any>(`${this.baseUrl}/login`, { email, password })
       .pipe(map(response => {
         if (response && response.data) {
           // Store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(response.data));
+          localStorage.setItem('token', response.data.token);
           
           // Notify subscribers of the new user data
           this.currentUserSubject.next(response.data);
@@ -46,4 +48,27 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
+  getToken(): string | null {
+    return this.currentUserValue?.token; // or wherever you store the token
+  }
+  
+
+
+  getUserData(){
+    var data=localStorage.getItem('currentUser')||''
+    if(data==''){
+      return false
+    }else{
+      return JSON.parse(data)
+    }
+  }
+  getCurrentUserId(): string | null {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return user?.id || null;  // Make sure 'currentUser' has an 'id' property
+  }
+ 
 }
+
+
+
+

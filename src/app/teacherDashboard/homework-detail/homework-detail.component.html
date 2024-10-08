@@ -1,0 +1,9 @@
+<div class="container">
+    <h2>Homework Detail</h2>
+    <div *ngIf="homework">
+      <h3>{{ homework.title }}</h3>
+      <p>{{ homework.description }}</p>
+      <p><strong>Due Date:</strong> {{ homework.dueDate | date }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,94 @@
+<app-sidebar></app-sidebar>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .join-requests-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .btn {
+      margin: 0 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+
+  <!-- Sidebar Section -->
+
+
+  <div class="body-wrapper">
+    <app-header-admin></app-header-admin>
+    <div class="container-fluid">
+  <div class="container my-5">
+    <div class="join-requests-container">
+      <h2>Join Requests for Classroom</h2>
+
+      <table *ngIf="joinRequests.length > 0; else noRequests" class="table table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>Student Email</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of joinRequests">
+            <td>{{ request.studentEmail }}</td>
+            <td>{{ request.status }}</td>
+            <td>
+              <button (click)="approveRequest(request.id)" class="btn btn-success">
+                Approve
+              </button>
+              <button (click)="rejectRequest(request.id)" class="btn btn-danger">
+                Reject
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #noRequests>
+        <p class="text-muted text-center">No join requests found for this classroom.</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
+  </div>
+</div>
+</body>
+
+</html>

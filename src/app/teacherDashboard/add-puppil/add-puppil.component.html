@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>Add Pupil to Classroom</h2>
+    <form (ngSubmit)="addPupilToClassroom()">
+      <div class="form-group">
+        <label for="classroomId">Classroom ID:</label>
+        <input type="text" id="classroomId" [(ngModel)]="classroomId" name="classroomId" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Student Email:</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Pupil</button>
+    </form>
+  </div>
+  

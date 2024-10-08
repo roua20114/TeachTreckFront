@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/./assets/css/styles.min.css" />
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px; /* Increased max width for a wider layout */
+    }
+
+    .profile-cover {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .activity-feed {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .dots-menu {
+      cursor: pointer;
+    }
+
+    .btn-group .dropdown-menu {
+      right: 0;
+      left: auto;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="body-wrapper">
+          <app-header-admin></app-header-admin>
+        
+
+            <div class="container-fluid">
+              <div class="container-fluid">
+            
+
+
+
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Exams in Classroom</h2>
+
+  <div *ngIf="exams.length > 0; else noExams">
+    <div *ngFor="let exam of exams" class="card exam-card mb-4 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title text-primary" routerLink="/student/submit-answers/{{exam.examId}}">{{ exam.title }}</h3>
+        <p class="card-text"><strong>Description:</strong> {{ exam.description }}</p>
+        <p class="card-text"><strong>Domain:</strong> {{ exam.domaine }}</p>
+
+        <hr />
+
+        <h5>Questions:</h5>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let question of exam.question" class="list-group-item">
+            {{ question.question }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noExams>
+    <div class="alert alert-warning" role="alert">
+      No exams found for this classroom.
+    </div>
+  </ng-template>
+</div>
+
+<!-- Custom Styles -->
+<style>
+  .exam-card {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .exam-card:hover {
+    transform: scale(1.02);
+  }
+
+  .card-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  h5 {
+    margin-top: 20px;
+    color: #333;
+  }
+
+  ul.list-group {
+    margin-top: 10px;
+  }
+
+  ul.list-group li {
+    background-color: #f9f9f9;
+  }
+
+  ul.list-group li:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+</style>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

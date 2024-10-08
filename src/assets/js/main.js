@@ -1,308 +1,262 @@
- AOS.init({
- 	duration: 800,
- 	easing: 'slide',
- 	once: false
- });
+$(function() {
+	'use strict';
 
-jQuery(document).ready(function($) {
+	var window_width = $(window).width(),
+		window_height = window.innerHeight,
+		header_height = $('.default-header').height(),
+		header_height_static = $('.site-header.static').outerHeight(),
+		fitscreen = window_height - header_height;
 
-	"use strict";
+	$('.fullscreen').css('height', window_height);
+	$('.fitscreen').css('height', fitscreen);
 
-	
+	//------- Header Scroll Class  js --------//
 
-	var siteMenuClone = function() {
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 100) {
+			$('.default-header').addClass('header-scrolled');
+		} else {
+			$('.default-header').removeClass('header-scrolled');
+		}
+	});
 
-		$('.js-clone-nav').each(function() {
-			var $this = $(this);
-			$this.clone().attr('class', 'site-nav-wrap').appendTo('.site-mobile-menu-body');
-		});
+	if ($('select')) {
+		$('select').niceSelect();
+	}
 
+	$('.img-pop-up').magnificPopup({
+		type: 'image',
+		gallery: {
+			enabled: true
+		}
+	});
 
-		setTimeout(function() {
-			
-			var counter = 0;
-      $('.site-mobile-menu .has-children').each(function(){
-        var $this = $(this);
-        
-        $this.prepend('<span class="arrow-collapse collapsed">');
+	// Search Toggle
+	$('#search-input-box').hide();
+	$('#search').on('click', function() {
+		$('#search-input-box').slideToggle();
+		$('#search-input').focus();
+	});
+	$('#close-search').on('click', function() {
+		$('#search-input-box').slideUp(500);
+	});
 
-        $this.find('.arrow-collapse').attr({
-          'data-toggle' : 'collapse',
-          'data-target' : '#collapseItem' + counter,
-        });
+	// $('.navbar-nav>li>a').on('click', function(){
+	//     $('.navbar-collapse').collapse('hide');
+	// });
 
-        $this.find('> ul').attr({
-          'class' : 'collapse',
-          'id' : 'collapseItem' + counter,
-        });
+	//  Counter Js
 
-        counter++;
+	$('.counter').counterUp({
+		delay: 10,
+		time: 1000
+	});
 
-      });
+	$('.play-btn').magnificPopup({
+		type: 'iframe',
+		mainClass: 'mfp-fade',
+		removalDelay: 160,
+		preloader: false,
+		fixedContentPos: false
+	});
 
-    }, 1000);
+	$('.popuar-course-carusel').owlCarousel({
+		items: 4,
+		loop: true,
+		autoplay: true,
+		margin: 30,
+		nav: true,
+		stagePadding: 60,
+		navText: [ "<img src='img/prev.png'>", "<img src='img/next.png'>" ],
+		responsive: {
+			0: {
+				items: 1,
+				stagePadding: 0
+			},
+			575: {
+				items: 2,
+				stagePadding: 0
+			},
+			768: {
+				items: 2,
+				stagePadding: 0
+			},
+			992: {
+				items: 3,
+				stagePadding: 0
+			},
+			1200: {
+				items: 3,
+				stagePadding: 60
+			},
+			1440: {
+				items: 4,
+				stagePadding: 60
+			}
+		}
+	});
 
-		$('body').on('click', '.arrow-collapse', function(e) {
-      var $this = $(this);
-      if ( $this.closest('li').find('.collapse').hasClass('show') ) {
-        $this.removeClass('active');
-      } else {
-        $this.addClass('active');
-      }
-      e.preventDefault();  
-      
-    });
+	$('.video-carousel').owlCarousel({
+		items: 1,
+		loop: true,
+		autoplay: true,
+		margin: 30,
+		nav: true,
+		dots: false,
+		navText: [ "<img src='img/prev.png'>", "<img src='img/next.png'>" ]
+	});
 
-		$(window).resize(function() {
-			var $this = $(this),
-				w = $this.width();
+	$('.testi-slider').owlCarousel({
+		items: 1,
+		loop: true,
+		autoplay: true,
+		margin: 30,
+		nav: true,
+		navText: [ "<img src='img/prev.png'>", "<img src='img/next.png'>" ]
+	});
 
-			if ( w > 768 ) {
-				if ( $('body').hasClass('offcanvas-menu') ) {
-					$('body').removeClass('offcanvas-menu');
+	// Select all links with hashes
+	$('.navbar-nav a[href*="#"]')
+		// Remove links that don't actually link to anything
+		.not('[href="#"]')
+		.not('[href="#0"]')
+		.on('click', function(event) {
+			// On-page links
+			if (
+				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') &&
+				location.hostname == this.hostname
+			) {
+				// Figure out element to scroll to
+				var target = $(this.hash);
+				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+				// Does a scroll target exist?
+				if (target.length) {
+					// Only prevent default if animation is actually gonna happen
+					event.preventDefault();
+					$('html, body').animate(
+						{
+							scrollTop: target.offset().top - 50
+						},
+						1000,
+						function() {
+							// Callback after animation
+							// Must change focus!
+							var $target = $(target);
+							$target.focus();
+							if ($target.is(':focus')) {
+								// Checking if the target was focused
+								return false;
+							} else {
+								$target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
+								$target.focus(); // Set focus again
+							}
+						}
+					);
 				}
 			}
-		})
-
-		$('body').on('click', '.js-menu-toggle', function(e) {
-			var $this = $(this);
-			e.preventDefault();
-
-			if ( $('body').hasClass('offcanvas-menu') ) {
-				$('body').removeClass('offcanvas-menu');
-				$this.removeClass('active');
-			} else {
-				$('body').addClass('offcanvas-menu');
-				$this.addClass('active');
-			}
-		}) 
-
-		// click outisde offcanvas
-		$(document).mouseup(function(e) {
-	    var container = $(".site-mobile-menu");
-	    if (!container.is(e.target) && container.has(e.target).length === 0) {
-	      if ( $('body').hasClass('offcanvas-menu') ) {
-					$('body').removeClass('offcanvas-menu');
-				}
-	    }
 		});
-	}; 
-	siteMenuClone();
 
+	// Google Map
+	if (document.getElementById('map')) {
+		google.maps.event.addDomListener(window, 'load', init);
 
-	var sitePlusMinus = function() {
-		$('.js-btn-minus').on('click', function(e){
-			e.preventDefault();
-			if ( $(this).closest('.input-group').find('.form-control').val() != 0  ) {
-				$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) - 1);
-			} else {
-				$(this).closest('.input-group').find('.form-control').val(parseInt(0));
-			}
-		});
-		$('.js-btn-plus').on('click', function(e){
-			e.preventDefault();
-			$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) + 1);
-		});
-	};
-	// sitePlusMinus();
+		function init() {
+			// Basic options for a simple Google Map
+			// For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+			var mapOptions = {
+				// How zoomed in you want the map to start at (always required)
+				zoom: 11,
 
+				// The latitude and longitude to center the map (always required)
+				center: new google.maps.LatLng(40.67, -73.94), // New York
 
-	var siteSliderRange = function() {
-    $( "#slider-range" ).slider({
-      range: true,
-      min: 0,
-      max: 500,
-      values: [ 75, 300 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-      }
-    });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-	};
-	// siteSliderRange();
+				// How you would like to style the map.
+				// This is where you would paste any style found on Snazzy Maps.
+				styles: [
+					{
+						featureType: 'water',
+						elementType: 'geometry',
+						stylers: [ { color: '#e9e9e9' }, { lightness: 17 } ]
+					},
+					{
+						featureType: 'landscape',
+						elementType: 'geometry',
+						stylers: [ { color: '#f5f5f5' }, { lightness: 20 } ]
+					},
+					{
+						featureType: 'road.highway',
+						elementType: 'geometry.fill',
+						stylers: [ { color: '#ffffff' }, { lightness: 17 } ]
+					},
+					{
+						featureType: 'road.highway',
+						elementType: 'geometry.stroke',
+						stylers: [ { color: '#ffffff' }, { lightness: 29 }, { weight: 0.2 } ]
+					},
+					{
+						featureType: 'road.arterial',
+						elementType: 'geometry',
+						stylers: [ { color: '#ffffff' }, { lightness: 18 } ]
+					},
+					{
+						featureType: 'road.local',
+						elementType: 'geometry',
+						stylers: [ { color: '#ffffff' }, { lightness: 16 } ]
+					},
+					{
+						featureType: 'poi',
+						elementType: 'geometry',
+						stylers: [ { color: '#f5f5f5' }, { lightness: 21 } ]
+					},
+					{
+						featureType: 'poi.park',
+						elementType: 'geometry',
+						stylers: [ { color: '#dedede' }, { lightness: 21 } ]
+					},
+					{
+						elementType: 'labels.text.stroke',
+						stylers: [ { visibility: 'on' }, { color: '#ffffff' }, { lightness: 16 } ]
+					},
+					{
+						elementType: 'labels.text.fill',
+						stylers: [ { saturation: 36 }, { color: '#333333' }, { lightness: 40 } ]
+					},
+					{ elementType: 'labels.icon', stylers: [ { visibility: 'off' } ] },
+					{
+						featureType: 'transit',
+						elementType: 'geometry',
+						stylers: [ { color: '#f2f2f2' }, { lightness: 19 } ]
+					},
+					{
+						featureType: 'administrative',
+						elementType: 'geometry.fill',
+						stylers: [ { color: '#fefefe' }, { lightness: 20 } ]
+					},
+					{
+						featureType: 'administrative',
+						elementType: 'geometry.stroke',
+						stylers: [ { color: '#fefefe' }, { lightness: 17 }, { weight: 1.2 } ]
+					}
+				]
+			};
 
+			// Get the HTML DOM element that will contain your map
+			// We are using a div with id="map" seen below in the <body>
+			var mapElement = document.getElementById('map');
 
-	
-	var siteCarousel = function () {
-		if ( $('.nonloop-block-13').length > 0 ) {
-			$('.nonloop-block-13').owlCarousel({
-		    center: false,
-		    items: 1,
-		    loop: true,
-				stagePadding: 0,
-		    margin: 0,
-		    autoplay: true,
-		    nav: true,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
-		    responsive:{
-	        600:{
-	        	margin: 0,
-	        	nav: true,
-	          items: 2
-	        },
-	        1000:{
-	        	margin: 0,
-	        	stagePadding: 0,
-	        	nav: true,
-	          items: 3
-	        },
-	        1200:{
-	        	margin: 0,
-	        	stagePadding: 0,
-	        	nav: true,
-	          items: 4
-	        }
-		    }
+			// Create the Google Map using our element and options defined above
+			var map = new google.maps.Map(mapElement, mapOptions);
+
+			// Let's also add a marker while we're at it
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(40.67, -73.94),
+				map: map,
+				title: 'Snazzy!'
 			});
 		}
+	}
 
-
-		if ( $('.nonloop-block-14').length > 0 ) {
-			$('.nonloop-block-14').owlCarousel({
-		    center: false,
-		    items: 1,
-		    loop: true,
-				stagePadding: 0,
-		    margin: 0,
-		    autoplay: true,
-		    dots: false,
-		    nav: false,
-				navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
-		    responsive:{
-	        600:{
-	        	margin: 20,
-	        	nav: true,
-	          items: 2
-	        },
-	        1000:{
-	        	margin: 30,
-	        	stagePadding: 20,
-	        	nav: true,
-	          items: 2
-	        },
-	        1200:{
-	        	margin: 30,
-	        	stagePadding: 20,
-	        	nav: true,
-	          items: 3
-	        }
-		    }
-			});
-
-			$('.customNextBtn').click(function() {
-			  $('.nonloop-block-14').trigger('next.owl.carousel');
-			})
-			$('.customPrevBtn').click(function() {
-			  $('.nonloop-block-14').trigger('prev.owl.carousel');
-			})
-		}
-
-
-
-		$('.slide-one-item').owlCarousel({
-	    center: false,
-	    items: 1,
-	    loop: true,
-	    smartSpeed: 900,
-	    autoplayTimeout: 7000,
-			stagePadding: 0,
-	    margin: 0,
-	    autoplay: true,
-	    nav: true,
-	    navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">'],
-	  });
-
-		$('.slide-one-item').on('translated.owl.carousel', function(event) {
-			console.log('translated');
-			$('.owl-item.active').find('.js-slide-text').addClass('active');
-		});
-		$('.slide-one-item').on('translate.owl.carousel', function(event) {
-			console.log('translate');
-			$('.owl-item.active').find('.js-slide-text').removeClass('active');
-		});
-		
-		$('.owl-item.active').find('.js-slide-text').addClass('active');
-
-	  
-	};
-	siteCarousel();
-
-	var siteStellar = function() {
-		$(window).stellar({
-	    responsive: false,
-	    parallaxBackgrounds: true,
-	    parallaxElements: true,
-	    horizontalScrolling: false,
-	    hideDistantElements: false,
-	    scrollProperty: 'scroll'
-	  });
-	};
-	siteStellar();
-
-	var siteCountDown = function() {
-
-		$('#date-countdown').countdown('2020/10/10', function(event) {
-		  var $this = $(this).html(event.strftime(''
-		    + '<span class="countdown-block"><span class="label">%w</span> weeks </span>'
-		    + '<span class="countdown-block"><span class="label">%d</span> days </span>'
-		    + '<span class="countdown-block"><span class="label">%H</span> hr </span>'
-		    + '<span class="countdown-block"><span class="label">%M</span> min </span>'
-		    + '<span class="countdown-block"><span class="label">%S</span> sec</span>'));
-		});
-				
-	};
-	siteCountDown();
-
-	var siteDatePicker = function() {
-
-		if ( $('.datepicker').length > 0 ) {
-			$('.datepicker').datepicker();
-		}
-
-	};
-	siteDatePicker();
-
-	var siteSticky = function() {
-		$(".js-sticky-header").sticky({topSpacing:0});
-	};
-	siteSticky();
-
-	// navigation
-  var OnePageNavigation = function() {
-    var navToggler = $('.site-menu-toggle');
-   	$("body").on("click", ".main-menu li a[href^='#'], .smoothscroll[href^='#'], .site-mobile-menu .site-nav-wrap li a", function(e) {
-      e.preventDefault();
-
-      var hash = this.hash;
-
-      $('html, body').animate({
-        'scrollTop': $(hash).offset().top
-      }, 600, 'easeInOutCirc', function(){
-        window.location.hash = hash;
-      });
-
-    });
-  };
-  OnePageNavigation();
-
-  var siteScroll = function() {
-
-  	
-
-  	$(window).scroll(function() {
-
-  		var st = $(this).scrollTop();
-
-  		if (st > 100) {
-  			$('.js-sticky-header').addClass('shrink');
-  		} else {
-  			$('.js-sticky-header').removeClass('shrink');
-  		}
-
-  	}) 
-
-  };
-  siteScroll();
-
+	$(document).ready(function() {
+		$('#mc_embed_signup').find('form').ajaxChimp();
+	});
 });

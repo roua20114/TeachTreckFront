@@ -1,0 +1,163 @@
+
+<body>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<app-student-header></app-student-header>
+
+	<!-- Menu -->
+
+	
+	
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background" style="background-image: url(/./assets/images/index_background.jpg);"></div>
+		<div class="home_content">
+			<div class="container">
+				<div class="row">
+					<div class="col text-center">
+						<h1 class="home_title">Let's learn together</h1>
+						<div class="home_button trans_200"><a href="#">get started</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Language -->
+
+	
+
+	<!-- Courses -->
+
+	<div class="courses">
+		<div class="courses_background"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h2 class="section_title text-center">Classrooms</h2>
+				</div>
+			</div>
+			<div class="row courses_row" >
+
+				<!-- Course -->
+				<div class="col-lg-4 course_col" *ngFor="let c of classrooms">
+					<div class="course">
+						<div class="course_image"><img src="/./assets/images/course_1.jpg" alt=""></div>
+						<div class="course_body" >
+							<div class="course_title">{{c.name}}</div>
+							<div class="course_info">
+								<ul>
+									<li><a href="instructors.html">{{c.code}}</a></li>
+									
+								</ul>
+							</div>
+							<div class="course_text">
+								<p>{{c.link}}.</p>
+							</div>
+						</div>
+						<div class="course_footer d-flex flex-row align-items-center justify-content-start">
+							<!-- <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>10</span></div>
+							<div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div> -->
+							<div class="course_mark course_free trans_200"
+							[class.disabled]="c.isPending" (click)="join(c.id)">
+							{{ c.isPending ? 'Pending' : 'Join' }}
+					</div>
+				</div>
+
+				<!-- Course -->
+				
+
+				<!-- Course -->
+			
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Instructors -->
+
+	
+
+	<!-- Register -->
+
+	<div class="register">
+		<div class="container">
+			<div class="row">
+				
+				<!-- Register Form -->
+
+				
+
+				<!-- Register Timer -->
+
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- Events -->
+
+	<div class="events">
+		<div class="container">
+			
+			
+		</div>
+	</div>
+
+	<!-- Blog -->
+
+	<div class="blog">
+		<div class="container">
+			<div class="row row-lg-eq-height">
+				
+				<!-- Blog Left -->
+				<div class="col-lg-6">
+					<div class="blog_left">
+						
+						
+						<div class="blog_categories">
+							<div class="row categories_row">
+
+								<!-- Category -->
+								
+
+								<!-- Category -->
+								
+
+								<!-- Category -->
+								
+								<!-- Category -->
+								
+
+								<!-- Category -->
+								
+
+								<!-- Category -->
+							
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Blog Right -->
+
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+
+	<app-student-footer></app-student-footer>
+</div>
+</div>
+</div>
+
+
+</body>
+

@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .teachers, .students {
+    margin-bottom: 40px;
+  }
+  
+  .teacher-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .teacher-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .teacher-profile span {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .add-teacher-btn, .add-student-btn {
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .student-list-placeholder {
+    text-align: center;
+  }
+  
+  .student-list-placeholder img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .student-list-placeholder p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .invite-students-btn {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .invite-students-btn:hover {
+    background-color: #357ae8;
+  }
+  

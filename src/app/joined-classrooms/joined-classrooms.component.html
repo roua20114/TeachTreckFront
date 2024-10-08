@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="/./assets/css/styles.min.css" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <app-header-admin></app-header-admin>
+      <!--  Header End -->
+      <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card"> 
+            <div class="card-body">
+              <div class="row">
+                <h5 class="card-title fw-semibold mb-4">My Classrooms</h5>
+                <div class="col-md-4" *ngFor="let classroom of classrooms"> 
+                  
+                  <div class="card">
+                    <img src="/./assets/images/products/s4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body" >
+                      <h5 class="card-title">{{ classroom.name }}</h5>
+                      <p class="card-text">{{ classroom.code }}</p>
+                      <a href="#" class="btn btn-primary" [routerLink]="['/classroomWall',classroom.id]">Enter Classroom</a>
+                      <br>
+                      <a href="#" class="card-link">{{ classroom.link }}</a>
+                    </div>
+                    <div>
+                     
+                    </div>
+                  </div>
+                </div>
+               
+             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+  

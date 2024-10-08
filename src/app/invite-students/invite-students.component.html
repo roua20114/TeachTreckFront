@@ -1,0 +1,10 @@
+
+<mat-form-field appearance="fill" class="full-width">
+
+    <mat-label>Enter student email</mat-label>
+    <input matInput placeholder="Email" [(ngModel)]="email" />
+  </mat-form-field>
+  
+  <button mat-raised-button color="primary" (click)="addStudent()">Add Student</button>
+  
+  <p *ngIf="message">{{ message }}</p>

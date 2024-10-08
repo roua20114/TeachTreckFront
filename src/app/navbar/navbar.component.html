@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <div class="container">
+    <!-- Branding or Logo -->
+    <a class="navbar-brand" routerLink="/allClassroom">
+     
+      My Classroom
+    </a>
+    
+    <!-- Toggler for mobile view -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <!-- Exams -->
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/exams/{{this.classroomId}}">
+            <i class="fas fa-book"></i> Add Exams 
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/allexams/{{this.classroomId}}">
+            <i class="fas fa-book"></i> All Exams 
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        <!-- Students -->
+        <li class="nav-item">
+          <button class="nav-link btn btn-link" (click)="goToPeoplePage()">
+            <i class="fas fa-users"></i> Students
+          </button>
+        </li>
+
+        <!-- Requests -->
+        <li class="nav-item">
+          <a class="nav-link" (click)="goToRequestPage()">
+            <i class="fas fa-envelope"></i> Requests
+          </a>
+        </li>
+
+        <!-- Disabled (for demonstration) -->
+        
+      </ul>
+    </div>
+  </div>
+</nav>

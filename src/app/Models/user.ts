@@ -1,6 +1,8 @@
 export class User {
     id?:string
     username?: string ;
+    firstName?:string;
+    lastName?:string;
     email?: string ;
     gender? : string ;
     mobile?: string ;
@@ -10,6 +12,7 @@ export class User {
     university?: string;
     token?: string;
     role?:string;
+    ProfilePictureUrl?:string;
 
     constructor() {}
 }

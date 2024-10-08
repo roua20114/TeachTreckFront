@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f['username'].value, this.f['password'].value)
+    this.authenticationService.login(this.f['email'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
         next: (data) => {
@@ -59,11 +59,11 @@ export class LoginComponent implements OnInit {
 
             if (role === 'ADMIN') {
               this.router.navigate(["/admin"]);
-            } if (role ==='Student'){
+            } if (role ==='STUDENT'){
               this.router.navigate(["/student"]);
             }
             if(role ==='TEACHER'){
-              this.router.navigate(["/teacher"]);
+              this.router.navigate(["/allClassroom"]);
             }
           } else {
             console.error('No user data received');

@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    margin: 20px;
+}
+
+.card-header {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.img-thumbnail {
+    width: 80px;
+    height: 80px;
+}

@@ -1,0 +1,89 @@
+/* General page styling */
+.classroom-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #343a40;
+  }
+  
+  /* Classroom card styling */
+  .classroom-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .classroom-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    flex: 1 1 calc(50% - 20px);
+    min-width: 300px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .classroom-card:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .classroom-name {
+    font-size: 1.2rem;
+    color: #007bff;
+  }
+  
+  .classroom-code {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .card-body {
+    margin-top: 10px;
+  }
+  
+  .card-body p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #495057;
+  }
+  
+  .card-body a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .card-body a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Empty state styling */
+  .empty-state {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .empty-icon {
+    max-width: 150px;
+    margin-bottom: 10px;
+  }
+  
+  .empty-state p {
+    font-size: 1.1rem;
+    color: #6c757d;
+  }
+  
