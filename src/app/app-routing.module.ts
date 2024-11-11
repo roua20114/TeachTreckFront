@@ -46,6 +46,7 @@ import { PeopleListStudntComponent } from './people-list-studnt/people-list-stud
 import { ProfileStudentComponent } from './profile-student/profile-student.component';
 import { ExamStudentListComponent } from './exam-student-list/exam-student-list.component';
 import { AnswerStudentComponent } from './answer-student/answer-student.component';
+import { UpdateStudentProfileComponent } from './update-student-profile/update-student-profile.component';
 
 
 
@@ -81,7 +82,7 @@ const routes: Routes = [
       { path: 'joinedclass/:studentId',component: JoinedClassroomsComponent, canActivate: [AuthGuard],data: { expectedRole: ['STUDENT'] }},
       { path: 'exams/:classroomId', component: AddExamComponent },
       { path: 'allexams/:classroomId',component:EvalComponent},
-      { path: 'exam/:examId', component: ExamDetailComponent },
+      { path: 'examdetail/:examId', component: ExamDetailComponent },
       { path: 'classrooms/joined/:studentId', component: JoinedClassListComponent },
       { path: 'classroomstudent/:classroomId', component: ClassroomWallStudentComponent},
       { path: 'peoplelist/:classroomId', component:PeopleListStudntComponent},
@@ -92,6 +93,7 @@ const routes: Routes = [
 
       { path: 'student',component: StudentHomeComponent, canActivate: [AuthGuard],data: { expectedRole: ['STUDENT'] }},
       { path: 'update-profile/:id', component: UpdateProfileComponent },
+      { path: 'update-profile-student/:id', component: UpdateStudentProfileComponent },
       { path: 'student/classroom/:classroomId/exams',component: ExamStudentListComponent},
       {path: 'student/submit-answers/:examId',component: AnswerStudentComponent},
       

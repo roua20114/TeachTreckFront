@@ -1,52 +1,55 @@
-<header class="header">
-			
-	
-
-    <!-- Header Content -->
-    <div class="header_container">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                        <div class="logo_container mr-auto">
-                            <img src="/./assets/images/9c39cb60a4ad3526565d83dfdba18a6492ba19f5.png" width="170" alt="">
-                                
-                            
-                        </div>
-                        <nav class="main_nav_contaner">
-                            <ul class="main_nav">
-                                <li class="active"><a routerLink="/classrooms/joined/{{currentUser?.id}}">My Classrooms </a></li>
-                                <li class="active"><a href="courses.html">   </a></li>
-                                <li><a href="instructors.html">  </a></li>
-                                <li class="active"><a href="#">  </a></li>
-                                <li><a href="">Blog</a></li>
-                                <li><a href="">Contact</a></li>
-                            </ul>
-                        </nav>
-                        <div class="header_content_right ml-auto text-right">
-                            <div class="header_search">
-                                <div class="search_form_container">
-                                    <form action="#" id="search_form" class="search_form trans_400">
-                                        <input type="search" class="header_search_input trans_400" placeholder="Type for Search" required="required">
-                                        <div class="search_button">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <!-- Hamburger -->
-
-                            <div class="user"><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></div>
-                            <div class="hamburger menu_mm">
-                                <i class="fa fa-bars menu_mm" aria-hidden="true"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="/./assets/css/styles.min.css" />
+  </head>
+  <header class="app-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav">
+        <li class="nav-item d-block d-xl-none">
+          <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+        <div class="logo_container mr-auto">
+          <img src="/./assets/images/9c39cb60a4ad3526565d83dfdba18a6492ba19f5.png" width="170" alt="">
         </div>
-    </div>
-
-</header>
+      </ul>
+  
+      <!-- Centered "My Classrooms" -->
+      <div class="navbar-collapse justify-content-center" id="navbarNavCenter">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a routerLink="/classrooms/joined/{{currentUser?.id}}" class="nav-link">My Classrooms</a>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+          <a target="_blank" class="btn btn-primary">{{currentUser?.username}}</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img [src]="profilePictureUrl" alt="" width="50" height="50" class="rounded-circle">            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+              <div class="message-body">
+                <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                  <i class="ti ti-user fs-6"></i>
+                  <p class="mb-0 fs-3" routerLink="/profilestudent/{{this.currentUser?.id}}">My Profile</p>
+                </a>
+                <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                  <i class="ti ti-edit fs-6"></i>
+                  <p class="mb-0 fs-3" routerLink="/update-profile-student/{{this.currentUser?.id}}">Edit Profile</p>
+                </a>
+                <a class="btn btn-outline-primary mx-3 mt-2 d-block" (click)="logout()">Logout</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  

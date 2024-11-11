@@ -1,34 +1,67 @@
-<div class="container mt-5">
-  <h2>Answer the Exam Questions</h2>
 
-  <form [formGroup]="examForm" (ngSubmit)="submitResponses()">
-    <div *ngFor="let question of questions; let i = index; trackBy: trackByQuestionId" class="form-group">
-      <label>{{i + 1}}. {{question.question}}</label>
-      <!-- Bind form control to the unique question._id -->
-      <textarea class="form-control"
-                [formControlName]="questionId"
-                required></textarea>
-    </div>
 
-    <button type="submit" class="btn btn-primary mt-4">Submit Exam</button>
-  </form>
+<app-header-student></app-header-student>
+<app-student-navbar></app-student-navbar>
+<br>
+
+
+
+<style>
+  body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+     
+  }
+  h2 {
+      text-align: center;
+      font-size: 30px;
+      font-style: italic;
+      font-weight: bold;
+  }
+</style>
+
+
+
+
+
+<h2 >Exam Evaluation</h2>
+
+<form (submit)="submitExam()" style="max-width: 600px; margin: auto;">
+  <div *ngFor="let question of questions" style="margin-bottom: 15px;">
+    <label style="font-weight: bold; display: block; margin-bottom: 5px;">{{ question.question }}</label>
+    <input [(ngModel)]="userResponses[question.questionId]" 
+           name="{{question.questionId}}" 
+           style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" />
+  </div>
+  <button type="submit" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+    Submit
+  </button>
+</form>
+
+<div *ngIf="result" style="max-width: 600px; margin: auto; margin-top: 30px;">
+
+  <h3>Evaluation Results</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Your Response</th>
+          <th>Correct Response</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evaluation of result.evaluations">
+          <!-- <td>{{ questions.find(q => q.questionId === evaluation.questionId)?.question }}</td> -->
+          
+          <td>{{ evaluation.user_response }}</td>
+          <td>{{ evaluation.correct_response }}</td>
+          <td> {{ evaluation.score_ratio }}</td>
+        </tr>
+      </tbody>
+    </table>
+  <p style="font-weight: bold; font-size: 1.2em;">Total Score: {{ result.total_score }}</p>
 </div>
 
-
-
-
-
-
-
-<!-- <div class="container mt-5">
-  <h2>Answer Exam Questions</h2>
-
-  <form (ngSubmit)="submitAnswers()">
-    <div *ngFor="let question of questions; let i = index" class="form-group">
-      <label>{{ question.question }}</label>
-      <textarea class="form-control" [(ngModel)]="userResponses[question.id]" [name]="'answer' + i" required></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary mt-3">Submit Answers</button>
-  </form>
-</div> -->

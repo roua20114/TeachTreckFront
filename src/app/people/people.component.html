@@ -149,6 +149,7 @@
 
           <!-- Header with Add Button -->
          
+          
          
           <!-- Loading Indicator -->
           <div *ngIf="isLoading">
@@ -172,8 +173,15 @@
                 <ul class="list-group">
                   <li *ngFor="let student of students" class="list-group-item">
                     {{ student }}
+                    
                     <button (click)="deleteStudent(student)">Remove</button>
+                    
                   </li>
+                  
+                    <li *ngFor="let email of approvedStudentEmails"  class="list-group-item">{{ email }}
+                      <button (click)="deleteStudent(email)">Remove</button>
+                    </li>
+                  
                 </ul>
                 <ng-template #noStudents>
                   <p class="text-muted">No students found in this classroom.</p>

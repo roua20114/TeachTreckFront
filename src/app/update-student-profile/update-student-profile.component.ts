@@ -1,35 +1,33 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TeacherService } from '../Service/teacher.service';
 import { User } from '../Models/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import { TeacherService } from '../Service/teacher.service';
 import { AuthService } from '../Service/auth.service';
-import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-update-profile',
-  templateUrl: './update-profile.component.html',
-  styleUrls: ['./update-profile.component.css']
+  selector: 'app-update-student-profile',
+  templateUrl: './update-student-profile.component.html',
+  styleUrls: ['./update-student-profile.component.css']
 })
-export class UpdateProfileComponent implements OnInit {
+export class UpdateStudentProfileComponent implements OnInit {
+
   profilePicturePreview: string | ArrayBuffer | null = null;
   errorMessage: string = ''; 
   profileForm!: FormGroup;
-  
+  // selectedFile: File | null = null;
   id:any;
- 
+  selectedFile!: File;
   userId!: any;
   user: User | undefined;
   currentUser:  User | null = null ;
-  selectedFile!: File;
   profilePictureUrl: string = '';
+
 
   constructor(private teacherService:TeacherService, private fb: FormBuilder, 
     private route: ActivatedRoute,private authenticationService:AuthService,
     private router: Router,private http: HttpClient) {this.authenticationService.currentUser.subscribe(x => this.currentUser = x);}
-
-
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id')!;
@@ -43,21 +41,6 @@ export class UpdateProfileComponent implements OnInit {
       }
     );
   }
-  
-
-
-  // Handle file selection and preview
-  // onFileSelected(event: Event): void {
-  //   const file = (event.target as HTMLInputElement).files![0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       this.profilePicturePreview = reader.result as string;
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
-
   createForm(): void {
     this.profileForm = this.fb.group({
       profilePictureUrl: [this.currentUser?.profilePictureUrl],
@@ -103,7 +86,7 @@ export class UpdateProfileComponent implements OnInit {
       .subscribe(response => {
         console.log('Profile updated successfully');
         this.loadUserProfile(); 
-        this.router.navigate(['/profile',this.userId]) // Refresh the profile to get the updated picture
+        this.router.navigate(['/profilestudent',this.userId]) // Refresh the profile to get the updated picture
       }, error => {
         console.error('Failed to update profile');
       });
@@ -133,5 +116,6 @@ export class UpdateProfileComponent implements OnInit {
         console.error('Failed to upload profile picture');
       });
   }
+
 
 }

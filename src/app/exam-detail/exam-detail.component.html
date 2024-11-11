@@ -1,17 +1,61 @@
-<div class="container mt-5" *ngIf="exam">
-    <h3>{{ exam.title }}</h3>
-    <p><strong>Description:</strong> {{ exam.description }}</p>
-  
-    <div *ngFor="let question of exam.question; let i = index" class="mt-4">
-      <h5>Question {{ i + 1 }}: {{ question.question }}</h5>
-  
-      <ul class="list-group mt-2">
-        <li *ngFor="let option of question.options" class="list-group-item">
-          {{ option.optionText }}
-        </li>
-      </ul>
-  
-      <p class="text-success mt-2"><strong>Answer:</strong> {{ question.answer }}</p>
+<app-sidebar></app-sidebar>
+
+<div
+  class="page-wrapper"
+  id="main-wrapper"
+  data-layout="vertical"
+  data-navbarbg="skin6"
+  data-sidebartype="full"
+  data-sidebar-position="fixed"
+  data-header-position="fixed"
+>
+  <div class="body-wrapper">
+    <app-header-admin></app-header-admin>
+
+    <div class="container-fluid">
+      <app-navbar></app-navbar>
+      <div class="container my-5">
+
+        <div class="row">
+          <div class="col-lg-12 mx-auto">
+            <!-- Page Title -->
+            <h2 class="text-center mb-4">Exam Responses</h2>
+
+            <!-- Loop through examResponses -->
+            <div
+              *ngFor="let response of examResponses"
+              class="card my-4 shadow-sm"
+            >
+              <div >
+               <strong> Student Name : {{ response.studentUsername }}</strong>
+              </div>
+              <div class="card-body">
+                <p><strong>Total Score:</strong> {{ response.total_score }}</p>
+
+                <strong class="text-secondary mt-4">Evaluations</strong>
+
+                <!-- Evaluations Loop -->
+                <div
+                  *ngFor="let evaluation of response.evaluations"
+                  class="evaluation-container border rounded p-3 mb-3"
+                  style="background-color: #f9f9f9;"
+                >
+                  <p><strong>Question:</strong> {{ evaluation.question_text }}</p>
+                  <p><strong>Student Answer:</strong> {{ evaluation.user_response }}</p>
+                  <p><strong>Correct Answer:</strong> {{ evaluation.correct_response }}</p>
+                  <p>
+                    <strong>Score:</strong> 
+                    <span [ngClass]="{'text-success': evaluation.score_ratio > 0, 'text-danger': evaluation.score_ratio === 0}">
+                      {{ evaluation.score_ratio }}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
   </div>
-  
+</div>

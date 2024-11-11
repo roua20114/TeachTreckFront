@@ -23,14 +23,16 @@
 
     <div class="body-wrapper">
       <app-header-admin></app-header-admin>
+     
       <div class="container-fluid">
+        <app-navbar></app-navbar>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Exams in Classroom</h2>
   
     <div *ngIf="exams.length > 0; else noExams">
       <div *ngFor="let exam of exams" class="card exam-card mb-4 shadow-sm">
         <div class="card-body">
-          <h3 class="card-title text-primary" routerLink="/student/submit-answers/{{exam.examId}}">{{ exam.title }}</h3>
+          <h3 class="card-title text-primary" routerLink="/examdetail/{{exam.examId}}">{{ exam.title }}</h3>
           <p class="card-text"><strong>Description:</strong> {{ exam.description }}</p>
           <p class="card-text"><strong>Domain:</strong> {{ exam.domaine }}</p>
   

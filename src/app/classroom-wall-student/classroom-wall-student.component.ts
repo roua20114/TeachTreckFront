@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Courses } from '../Models/courses';
 import { Classroom } from '../Models/classroom';
@@ -11,6 +11,7 @@ import { CourseService } from '../Service/course.service';
 import { Comment } from '../Models/comment';
 import Swal from 'sweetalert2';
 import { ClassroomService } from '../Service/classroom.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-classroom-wall-student',
@@ -43,7 +44,10 @@ export class ClassroomWallStudentComponent implements OnInit {
   userId:any;
   newComment = { content: '' };
   newPost = { content: '' };
-
+  studentId:any;
+  profileinfo!: User;
+  user:any;
+  @Input() profilePictureUrl: SafeUrl | null = null;
   constructor( private route: ActivatedRoute,
     private studentService: StudentService,
     private formBuilder: FormBuilder,
@@ -66,6 +70,8 @@ export class ClassroomWallStudentComponent implements OnInit {
     this.classroomId = this.route.snapshot.paramMap.get('classroomId'); 
     this.postId = this.route.snapshot.paramMap.get('id');
     this.userId = this.authenticationService.getCurrentUserId();
+    // this.userId = this.route.snapshot.paramMap.get('studentId');
+    
  
     console.log(this.postId);
     // Assuming 'id' is the parameter name in the route

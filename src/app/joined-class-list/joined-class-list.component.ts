@@ -12,8 +12,9 @@ import { User } from '../Models/user';
 })
 export class JoinedClassListComponent implements OnInit {
   classrooms: Classroom[] = [];
-  studentId: string| null = null
+  studentId: any
   currentUser:  User | null = null ;
+  approvedClassrooms: any[] = [];
 
   constructor(private studentService: StudentService,private authService: AuthService) { 
     this.authService.currentUser.subscribe(x => this.currentUser = x);
@@ -21,18 +22,25 @@ export class JoinedClassListComponent implements OnInit {
 
   ngOnInit(): void {
     this.studentId = this.authService.getCurrentUserId();
+
+    // Check if studentId is being retrieved correctly
+    console.log('Student ID:', this.studentId);
+
     if (this.studentId) {
-      this.studentService.getJoinedClassrooms(this.studentId).subscribe(
-        (data: Classroom[]) => {
-          this.classrooms = data;
+      this.studentService.getApprovedClassrooms(this.studentId).subscribe(
+        (classrooms) => {
+          console.log('Fetched Approved Classrooms:', classrooms);  // Check what data is coming back
+          this.approvedClassrooms = classrooms;
         },
         (error) => {
-          console.error('Failed to load joined classrooms', error);
+          console.error('Error fetching approved classrooms:', error);
         }
       );
     } else {
-      console.error('No student ID found');
+      console.error('Student ID is null');
     }
+  
+    
   }
     
   

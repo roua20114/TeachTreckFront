@@ -19,27 +19,21 @@ export class StudentService {
   private apiUrl4 = 'http://localhost:8081/api/exams';
   private apiUrl5 = 'http://localhost:8081/api/answers';
   private url5='http://localhost:8081/api/answers';
+
   private currentClassroomId: string | null = null;
   constructor(private http: HttpClient) { }
 
   createPupil(email: string, name: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}?email=${email}&name=${name}`, {});
   }
-  sendJoinRequest(studentId: string, classroomId: string): Observable<string> {
-    const params = new HttpParams()
-      .set('studentId', studentId)
-      .set('classroomId', classroomId);
-
-    return this.http.post(this.apiUrl2, {}, { params, responseType: 'text' })
-      .pipe(
-        catchError(this.handleError)
-      );
+  sendJoinRequest(classroomId: string, studentId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl2}/send?classroomId=${classroomId}&studentId=${studentId}`, {});
   }
   requestToJoinClassroom(studentId: string, classroomId: string): Observable<JoinRequest> {
     return this.http.post<JoinRequest>(`${this.apiUrl2}/request`, { studentId, classroomId });
   }
-  createJoinRequest(classroomId: string, studentEmail: string): Observable<any> {
-    return this.http.post(`${this.apiUrl2}/request?classroomId=${classroomId}&studentEmail=${studentEmail}`, {});
+  createJoinRequest(classroomId: string, student: any): Observable<any> {
+    return this.http.post(`${this.apiUrl2}/send?classroomId=${classroomId}`, student);
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
@@ -53,11 +47,23 @@ export class StudentService {
     }
     return throwError(errorMsg);
   }
-  getApprovedClassrooms(studentId: number): Observable<Classroom[]> {
-    return this.http.get<Classroom[]>(`${this.apiUrl}/approved/${studentId}`);
+  // getApprovedClassrooms(studentId: number): Observable<Classroom[]> {
+  //   return this.http.get<Classroom[]>(`${this.apiUrl}/approved/${studentId}`);
+  // }
+  // getJoinedClassrooms(studentId: string): Observable<Classroom[]> {
+  //   return this.http.get<Classroom[]>(`${this.apiUrl}/joined/${studentId}`);
+  // }
+
+  getPendingRequests(classroomId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl2}/classroom/${classroomId}/pending`);
   }
-  getJoinedClassrooms(studentId: string): Observable<Classroom[]> {
-    return this.http.get<Classroom[]>(`${this.apiUrl}/joined/${studentId}`);
+
+  updateRequestStatus(requestId: string, status: string): Observable<any> {
+    return this.http.post(`${this.apiUrl2}/${requestId}/status?status=${status}`, {});
+  }
+
+  getApprovedClassrooms(studentId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl2}/student/${studentId}/approved`);
   }
 
 
@@ -110,19 +116,24 @@ export class StudentService {
   }
 
   // Submit student answers
-  submitAnswers(requestBody: any): Observable<any> {
-    return this.http.post<any>(`${this.url5}/submit`, requestBody);
+  submitAnswers(examId: string, user_responses  : { [key: string]: string }): Observable<any> {
+    const requestBody = {
+      examId: examId,
+      user_responses: user_responses  
+    };
+    return this.http.post<any>(`${this.url5}/submit_answers`, requestBody);
   }
 
   // Fetch answers for a specific exam (teacher evaluation)
 
-  evaluateExam(examId: string, studentId: string,userResponses: string[]): Observable<any> {
+  evaluateExam(userResponses: Record<string, string>, examId: string, userId:any): Observable<any> {
     const requestBody = {
+      userResponses: userResponses,
       examId: examId,
-      studentId: studentId,
-      userResponses: userResponses
+      userId: userId 
     };
-    return this.http.post<any>(`${this.url5}/evaluate`, requestBody);
+
+    return this.http.post(`${this.url5}/evaluate`, requestBody);
   }
 
   

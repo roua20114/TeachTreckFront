@@ -2,8 +2,9 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { AuthService } from '../Service/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherService } from '../Service/teacher.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from '../Models/user';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profil-teacher',
@@ -16,12 +17,13 @@ export class ProfilTeacherComponent implements OnInit {
   teacherId:any;
   
   profileinfo!: User;
-  profilePictureUrl!: string;
+  
   id: any;
-  userId!:string
-
+  userId:any
+  profilePictureUrl: SafeUrl | null = null; 
   constructor(private service:AuthService, private inject:Injector,private router:Router , private teacherService: TeacherService,private authService:AuthService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,private http: HttpClient,private sanitizer: DomSanitizer
+  
   ) { }
 
   ngOnInit(): void {
@@ -36,10 +38,18 @@ export class ProfilTeacherComponent implements OnInit {
     this.teacherId = this.profileinfo.id;  // Adjust if the key is different, e.g., profileinfo.teacherId
     console.log("Teacher ID:", this.teacherId);  // Ensure that teacherId is properly set
   }
-  this.teacherId = this.route.snapshot.paramMap.get('id');
+  this.userId = this.route.snapshot.paramMap.get('id');
     this.teacherService.getTeacherProfile(this.teacherId).subscribe((data: User) => {
       this.profileinfo = data;
        // Load profile picture after fetching user data
+    });
+    this.http.get(`http://localhost:8081/user-actions/${this.userId}/profilePicture`, { responseType: 'blob' })
+    .subscribe(blob => {
+      const objectURL = URL.createObjectURL(blob);
+      this.profilePictureUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL); 
+      
+    }, error => {
+      console.error('Failed to load profile picture');
     });
   }
  
@@ -78,12 +88,13 @@ export class ProfilTeacherComponent implements OnInit {
     // Fetch user profile details, including the profile picture URL
     this.teacherService.getUserProfile(this.teacherId).subscribe((profile: User) => {
       this.profileinfo = profile;
-      this.profilePictureUrl = profile.ProfilePictureUrl ? profile.ProfilePictureUrl : '/assets/images/default-avatar.png'; // Use default if none provided
+     
     }, (error) => {
       console.error('Error loading profile', error);
       // Handle error
     });
   }
+  
   
   
   

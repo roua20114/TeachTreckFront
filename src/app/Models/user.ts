@@ -12,7 +12,8 @@ export class User {
     university?: string;
     token?: string;
     role?:string;
-    ProfilePictureUrl?:string;
+    profilePictureUrl?: string;
+    profilePicture?: any;
 
     constructor() {}
 }

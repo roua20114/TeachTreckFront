@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from '../Models/user';
 import { Exam } from '../Models/exam';
 import { JoinRequest } from '../Models/join-request';
+import { Classroom } from '../Models/classroom';
+import { ApprovedJoinRequest } from '../approved-join-request';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,7 @@ export class TeacherService {
   private url3='http://localhost:8081/api/exams'
   private url4='http://localhost:8081/exams'
   private url5='http://localhost:8081/api/answers';
+  private url6= 'http://localhost:8000';
 
   constructor(private http: HttpClient) { }
 
@@ -23,10 +26,9 @@ export class TeacherService {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
 
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
+    
 
-    return this.http.post(`${this.apiUrl}/${teacherId}/uploadProfilePicture`, formData, { headers });
+    return this.http.post(`${this.apiUrl}/${teacherId}/uploadProfilePicture`, formData);
   }
   getJoinRequestsByClassroom(classroomId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/classroom/${classroomId}`);
@@ -66,7 +68,7 @@ export class TeacherService {
   // }
   updateUserProfile(id: string, updatedUser: User, profilePicture: File): Observable<User> {
     const formData: FormData = new FormData();
-    formData.append('profilePicture', profilePicture);
+    formData.append('profilePicture', profilePicture,profilePicture.name);
     formData.append('updatedUser', new Blob([JSON.stringify(updatedUser)], { type: 'application/json' }));
 
     return this.http.put<User>(`${this.url2}/updateprofile/${id}`, formData);
@@ -113,6 +115,24 @@ export class TeacherService {
 
   getExamsByClassroom(classroomId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/allexamst/${classroomId}`);
+  }
+  getTeacherProfil(id: string): Observable<User> {
+    return this.http.get<User>(`${this.url2}/api/teacher/${id}`);
+  }
+
+  getExamResponses(examId: string): Observable<any> {
+    return this.http.get(`${this.url6}/get_exam_responses/${examId}`);
+  }
+
+  getAllApprovedClassrooms(): Observable<Classroom[]> {
+    return this.http.get<Classroom[]>(`${this.url}/approved`);
+  }
+
+  getAllApprovedJoinRequestsWithStudentEmails(): Observable<ApprovedJoinRequest[]> {
+    return this.http.get<ApprovedJoinRequest[]>(`${this.url}/approved`);
+  }
+  getApprovedStudentEmails(classroomId: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.url}/${classroomId}/approved-emails`);
   }
 
   

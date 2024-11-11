@@ -27,13 +27,54 @@ body {
 }
 
 .course_footer {
-    background-color: #f1f1f1; /* Light footer */
+    background-color: #f1f1f1;
     padding: 15px;
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    align-items: center;
 }
 .course_mark.disabled {
     background-color: #ccc;
     color: #fff;
     pointer-events: none;
     cursor: not-allowed;
+}
+
+
+  /* Base styling for the button */
+.course_button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #4caf50, #81c784);
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    width: 80%;
+    height: 80%; /* Ensures it takes up the full width of the wrapper */
+    max-width: 150px; /* Optional: limits button width */
+}
+  
+  /* Hover effect */
+ 
+  
+  /* Active (pressed) effect */
+  .course_button:active {
+   
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
+  
+  /* Disabled state styling */
+  .course_button.disabled {
+    background: #b0bec5; /* Gray color for the "Pending" state */
+    color: #ffffff;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  
   

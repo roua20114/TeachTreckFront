@@ -81,9 +81,9 @@ onSubmit() {
   this.authService.register(this.data)
       .subscribe(
           data => {
-            
+            Swal.fire('Registred', 'success') 
 
-              this.router.navigate(["/student"]);
+              this.router.navigate(["/login"]);
           },
           error => {
               this.error = error;
@@ -107,7 +107,7 @@ this.submitted2 = true;
           data => {
             Swal.fire('Registred', 'success') 
             
-            this.router.navigate(["/teacher"]);
+            this.router.navigate(["/login"]);
 
           },
           error => {

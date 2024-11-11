@@ -5,6 +5,8 @@ import { StudentService } from '../Service/student.service';
 import { AuthService } from '../Service/auth.service';
 import { User } from '../Models/user';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { JoinRequest } from '../Models/join-request';
 
 @Component({
   selector: 'app-student-home',
@@ -18,6 +20,9 @@ export class StudentHomeComponent implements OnInit {
   responseMessage: string = '';
   currentUser:  User | null = null ;
   message!: string;
+  userId:any;
+  errorMessage: string = '';
+  joinRequests: JoinRequest[] = [];
 
   constructor(private route:ActivatedRoute,private classroomService: ClassroomService, private studentService:StudentService, private authService:AuthService) { 
     this.authService.currentUser.subscribe(x => this.currentUser = x);
@@ -26,49 +31,44 @@ export class StudentHomeComponent implements OnInit {
   ngOnInit(): void {
     this.studentId=this.currentUser?.email;
     this.classroomId=this.route.snapshot.paramMap.get('classroomId')
+    this.userId = this.authService.getCurrentUserId();
     this.classroomService.getAllclassrooms().subscribe((data: Classroom[]) => {
-      this.classrooms = data;
+      this.classrooms = data
+      this.filterClassrooms(); 
     }, (error) => {
       console.error('Error fetching classrooms', error);
     });
+    
   }
-  // joinCourse(classroomId: string, course: any): void {
-  //   if (this.currentUser?.id && classroomId) {
-  //     // Send join request
-  //     this.studentService.sendJoinRequest(this.currentUser?.id, classroomId)
-  //       .subscribe({
-  //         next: (response) => {
-  //           this.responseMessage = response;
-  //           course.isPending = true;  // Disable the button and change the text to 'Pending'
-  //           alert('Join request sent successfully!');  // Optional alert for success
-  //         },
-  //         error: (error) => {
-  //           this.responseMessage = error;
-  //           alert('Failed to send join request: ' + error);  // Optional alert for failure
-  //         }
-  //       });
-  //   } else {
-  //     this.responseMessage = 'Missing student ID or classroom ID.';
-  //     alert('Please make sure both Student ID and Classroom ID are provided.');
-  //   }
-  // }
-  join(classroomId: string) {
-    if (!classroomId || !this.studentId) return;
+  filterClassrooms() {
+    // Get IDs of classrooms with pending join requests
+    const pendingClassroomIds = this.joinRequests
+      .filter(request => request.status === 'pending') // Look for 'pending' status
+      .map(request => request.classroomId);
 
-    this.studentService.createJoinRequest(classroomId, this.studentId)
-      .subscribe(
-        response => {
-          console.log('Join request sent:', response);
-          // Optionally update the UI to disable the join button for this classroom
-          const classroom = this.classrooms.find(c => c.id === classroomId);
-          if (classroom) {
-            classroom.isPending = true;
-          }
+    // Filter out classrooms that are pending
+    this.classrooms = this.classrooms.filter(classroom => !pendingClassroomIds.includes(classroom.id));
+  }
+
+
+  sendJoinRequest(classroomId: string) {
+    // Check if userId (studentId) and classroomId are both available before sending the request
+    if (this.userId && classroomId) {
+      this.studentService.sendJoinRequest(classroomId, this.userId).subscribe(
+        (response) => {
+          console.log('Join request sent successfully', response);
+          
+          Swal.fire('Success','Request sent successfully','success')
+          this.ngOnInit();
         },
-        error => {
+        (error) => {
           console.error('Error sending join request:', error);
         }
       );
+    } else {
+      this.errorMessage = 'Student ID or Classroom ID is missing';
+      console.error(this.errorMessage);
+    }
   }
     
 }

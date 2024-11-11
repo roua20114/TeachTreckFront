@@ -53,20 +53,22 @@
     <div class="container-fluid">
   <div class="container my-5">
     <div class="join-requests-container">
-      <h2>Join Requests for Classroom</h2>
+      <h2>Join Requests for Classrooms</h2>
 
-      <table *ngIf="joinRequests.length > 0; else noRequests" class="table table-striped">
+      <table >
         <thead class="table-light">
           <tr>
-            <th>Student Email</th>
-            <th>Status</th>
+            <th>Student </th>
+            <th>Image </th>
+            <th>Classroom</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let request of joinRequests">
-            <td>{{ request.studentEmail }}</td>
-            <td>{{ request.status }}</td>
+          <tr *ngFor="let request of pendingRequests">
+            <td>{{ request.student.email }}</td>
+            <td><img src="{{ request.student.profilePictureUrl }}" alt="Student Image" width="50"></td>
+            <td>{{ request.classroom.name  }}</td>
             <td>
               <button (click)="approveRequest(request.id)" class="btn btn-success">
                 Approve

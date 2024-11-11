@@ -1,0 +1,17 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn-primary {
+    margin-top: 1.5rem;
+  }
+  
+  .table {
+    margin-top: 2rem;
+  }
+  

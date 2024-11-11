@@ -120,12 +120,7 @@ export class ClassroomService {
   getPostsByClassroom(classroomId: string): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.apiUrl3}/${classroomId}/posts`);
   }
-  // addCommentToPost(postId: string, content: string): Observable<any> {
-  //   const url = `${this.baseUrl}/post/${postId}/comment`;
-  //   const params = { content };
-    
-  //   return this.http.post(url, {}, { params });
-  // }
+  
  
   getExamsByClassroomId(classroomId: string): Observable<Exam[]> {
     return this.http.get<Exam[]>(`${this.apiUrl}/${classroomId}/exams`);
@@ -140,10 +135,7 @@ export class ClassroomService {
   }
  
 
-  // // Method to get posts by classroom id
-  // getPostsByClassroom(classroomId: string): Observable<any[]> {
-  //   return this.http.get<any[]>(`${this.apiUrl3}/classroom/${classroomId}`);
-  // }
+ 
   
 
 

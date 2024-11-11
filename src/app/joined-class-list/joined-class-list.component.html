@@ -1,7 +1,8 @@
-<div class="classroom-container" *ngIf="classrooms.length > 0; else noClassrooms">
+<app-header-student></app-header-student>
+<div class="classroom-container" >
     <h3 class="title">Your Joined Classrooms</h3>
     <div class="classroom-list">
-      <div class="classroom-card" *ngFor="let classroom of classrooms">
+      <div class="classroom-card" *ngFor="let classroom of approvedClassrooms">
         <div class="card-header">
           <h4 class="classroom-name" routerLink="/classroomstudent/{{classroom.id}}">{{ classroom.name }}</h4>
           <span class="classroom-code">Code: {{ classroom.code }}</span>
@@ -14,10 +15,5 @@
     </div>
   </div>
   
-  <ng-template #noClassrooms>
-    <div class="empty-state">
-      <img src="assets/no-classrooms.png" alt="No classrooms" class="empty-icon" />
-      <p>You have not joined any classrooms yet.</p>
-    </div>
-  </ng-template>
+  
   

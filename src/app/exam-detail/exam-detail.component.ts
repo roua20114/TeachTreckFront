@@ -10,16 +10,18 @@ import { ClassroomService } from '../Service/classroom.service';
   styleUrls: ['./exam-detail.component.css']
 })
 export class ExamDetailComponent implements OnInit {
-  examId!: string;
+ 
   exam: Exam | undefined;
+  examId!: string ;  // The examId will be dynamically set
+  examResponses: any[] = [];
 
-  constructor(private examService: TeacherService, private route: ActivatedRoute) { }
+  constructor(private teacherService: TeacherService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.examId = this.route.snapshot.paramMap.get('examId')!;
     
-    // Fetch the exam details using the service
-    this.examService.getExamById(this.examId).subscribe(
+   
+    this.teacherService.getExamById(this.examId).subscribe(
       (data: Exam) => {
         this.exam = data;
         console.log('Exam details fetched successfully', this.exam);
@@ -28,7 +30,27 @@ export class ExamDetailComponent implements OnInit {
         console.error('Error fetching exam details', error);
       }
     );
+    this.teacherService.getExamResponses(this.examId).subscribe(
+    
+      (data) => {
+        console.log("Fetched responses:",data); 
+          if (data && data && Array.isArray(data)) {
+           
+              // Make sure that responses exist and are properly assigned
+              this.examResponses = data;
+              console.log('Fetched responses:', this.examResponses);  // Log responses to verify
+          } 
+      },
+      (error) => {
+          console.error('Error fetching responses', error);
+          this.examResponses = [];  // Handle error case
+      }
+  );
   }
+ 
+  getKeys(obj: any): string[] {
+    return Object.keys(obj);
+}
   
 
 }

@@ -5,203 +5,185 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Modernize Free</title>
-    <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/favicon.png" />
-    <link rel="stylesheet" href="/./assets/css/styles.min.css" />
-    
-    
-    <style>
-         body, html {
-            height: 200%;
-            margin: 5;
-            background-color: #FAFAD2;
-        }
-        .card-container {
-            display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%; /* Set the height to 100% */
-            
-        }
-        .card {
-            width: 200%; /* Adjust this width as needed */
-            margin: auto; /* Adjust this width as needed */
-            
-           
-           
-        }
-        .tab-pane {
-            width: 100%;
-        }
-        .nav-pills .nav-link {
-            margin: 0 5px;
-        }
-       
-    </style>
+    <link rel="shortcut icon" type="image/png" href="/./assets/images/logos/Capture_d_écran_2024-06-26_115558-removebg-preview.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body >
     <div class="container mt-5">
-        <!-- Image at the top left -->
-        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        <!-- Center the card -->
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7 col-sm-9">
+                <div class="card shadow-lg p-4">
+                    <div class="card-body text-center">
+                        <!-- Logo -->
+                        <a href="./index.html" class="text-center d-block py-3 mb-4">
+                            <img src="/./assets/images/logos/Capture_d_écran_2024-06-26_115558-removebg-preview.png" width="180" alt="">
+                        </a>
 
-            <div 
-                class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
-                <div class="d-flex align-items-center justify-content-center w-100">
-                    <div class="row justify-content-center w-100">
-                        <div class="col-md-8 col-lg-6 col-xxl-3">
-                            <div class="card mb-0">
-                                <div class="card-body">
-                                    <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                        <img src="/./assets/images/logos/dark-logo.svg" width="180" alt="">
-                                    </a>
-                                    <div id="tabs">
-                                        <ul class="nav nav-pills mb-4">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" href="#student" [ngClass]="{ 'active': activeTab === 'STUDENT' }" (click)="search('STUDENT', $event)" data-toggle="tab" style="color: ecbc76;">Register as Student</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#teacher" [ngClass]="{ 'active': activeTab === 'TEACHER' }" data-toggle="tab" (click)="result('TEACHER', $event)">Register as Teacher</a>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="STUDENT" [ngClass]="{ 'active': activeTab === 'STUDENT' }">
-                                                <form [formGroup]="registerFormStudent" (ngSubmit)="onSubmit()">
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputtext1" class="form-label">Name</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" type="text" class="form-control" formControlName="username" />
-                                                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                                                            <div>First Name is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" type="text" formControlName="email" class="form-control" />
-                                                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                                            <div>Email is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputGender" class="form-label">Gender</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && f['gender'].errors }" type="text" formControlName="gender" class="form-control" />
-                                                        <div *ngIf="submitted && f['gender'].errors" class="invalid-feedback">
-                                                            <div>Gender is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputAddress" class="form-label">Address</label>
-                                                        <input  [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" type="text" formControlName="address" class="form-control" />
-                                                        <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
-                                                            <div>Password is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputUniversity" class="form-label">University</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && f['university'].errors }" type="text" formControlName="university" class="form-control" />
-                                                        <div *ngIf="submitted && f['university'].errors" class="invalid-feedback">
-                                                            <div>University is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputMobile" class="form-label">Mobile Number</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }" type="number" formControlName="mobile" class="form-control" />
-                                                        <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">
-                                                            <div>Mobile Number is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputStudyField" class="form-label">Study Field</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && f['studyField'].errors }" type="text" formControlName="studyField" class="form-control" />
-                                                        <div *ngIf="submitted && f['studyField'].errors" class="invalid-feedback">
-                                                            <div>Study Field is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputPassword" class="form-label">Password</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" type="password" formControlName="password" class="form-control" />
-                                                        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                                                            <div>Password is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                                                        <a class="text-primary fw-bold ms-2" routerLink="/login">Sign In</a>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="tab-pane" id="TEACHER" [ngClass]="{ 'active': activeTab === 'TEACHER' }">
-                                                <form [formGroup]="registerFormTeacher" (ngSubmit)="onSubmitTeacher()">
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputtext1" class="form-label">Name</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['username'].errors }" type="text" class="form-control" formControlName="username" />
-                                                        <div *ngIf="submitted && g['username'].errors" class="invalid-feedback">
-                                                            <div>First Name is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['email'].errors }" type="email" formControlName="email" class="form-control" />
-                                                        <div *ngIf="submitted && g['email'].errors" class="invalid-feedback">
-                                                            <div>Email is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputGender" class="form-label">Gender</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['gender'].errors }" type="text" formControlName="gender" class="form-control" />
-                                                        <div *ngIf="submitted && g['gender'].errors" class="invalid-feedback">
-                                                            <div>Gender is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputAddress" class="form-label">Address</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['address'].errors }" type="text" formControlName="address" class="form-control" />
-                                                        <div *ngIf="submitted && g['address'].errors" class="invalid-feedback">
-                                                            <div>Address is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputUniversity" class="form-label">University</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['university'].errors }" type="text" formControlName="university" class="form-control" />
-                                                        <div *ngIf="submitted && g['university'].errors" class="invalid-feedback">
-                                                            <div>University is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputMobile" class="form-label">Mobile Number</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['mobile'].errors }" type="number" formControlName="mobile" class="form-control" />
-                                                        <div *ngIf="submitted && g['mobile'].errors" class="invalid-feedback">
-                                                            <div>Mobile Number is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputStudyField" class="form-label">Department</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['department'].errors }" type="text" formControlName="department" class="form-control" />
-                                                        <div *ngIf="submitted && g['department'].errors" class="invalid-feedback">
-                                                            <div>Department is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputPassword" class="form-label">Password</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['password'].errors }" type="password" formControlName="password" class="form-control" />
-                                                        <div *ngIf="submitted && g['password'].errors" class="invalid-feedback">
-                                                            <div>Password is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label for="exampleInputPassword" class="form-label">Domain</label>
-                                                        <input [ngClass]="{ 'is-invalid': submitted && g['domain'].errors }" type="domain" formControlName="domain" class="form-control" />
-                                                        <div *ngIf="submitted && g['domain'].errors" class="invalid-feedback">
-                                                            <div>Domain is required</div>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                                                        <a class="text-primary fw-bold ms-2" routerLink="/login">Sign In</a>
-                                                    </div>
-                                                </form>
-                                            </div>
+                        <!-- Tabs -->
+                        <ul class="nav nav-pills justify-content-center mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#student" [ngClass]="{ 'active': activeTab === 'STUDENT' }" (click)="search('STUDENT', $event)" data-toggle="tab" style="color: ecbc76;">Register as Student</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#teacher" [ngClass]="{ 'active': activeTab === 'TEACHER' }" data-toggle="tab" (click)="result('TEACHER', $event)">Register as Teacher</a>
+                           
+                            </li>
+                        </ul>
+
+                        <!-- Form content -->
+                        <div class="tab-content">
+                            <!-- Student Registration Form -->
+                            <div class="tab-pane active" id="STUDENT" [ngClass]="{ 'active': activeTab === 'STUDENT' }">
+                                <form [formGroup]="registerFormStudent" (ngSubmit)="onSubmit()">
+                                    <div class="mb-3">
+                                        <label for="exampleInputtext1" class="form-label">Name</label>
+                                        <input [ngClass]="{ 'is-invalid': submitted && g['username'].errors }" type="text" class="form-control" formControlName="username" />
+                                        <div *ngIf="submitted && g['username'].errors" class="invalid-feedback">
+                                            <div>First Name is required</div>
                                         </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                                        <input [ngClass]="{ 'is-invalid': submitted && g['email'].errors }" type="email" formControlName="email" class="form-control" />
+                                        <div *ngIf="submitted && g['email'].errors" class="invalid-feedback">
+                                            <div>Email is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputGender" class="form-label">Gender</label>
+                                        <select [ngClass]="{ 'is-invalid': submitted && g['gender'].errors }" type="text" formControlName="gender" class="form-control" >
+                                        
+                                            <option value="Female">Female</option>
+                                            <option value="Male">Male</option>
+                                        </select>
+                                        <div *ngIf="submitted && g['gender'].errors" class="invalid-feedback">
+                                            <div>Gender is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputAddress" class="form-label">Address</label>
+                                        <input [ngClass]="{ 'is-invalid': submitted && g['address'].errors }" type="text" formControlName="address" class="form-control" />
+                                        <div *ngIf="submitted && g['address'].errors" class="invalid-feedback">
+                                            <div>Address is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputUniversity" class="form-label">University</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['university'].errors }" type="text" formControlName="university" class="form-control" />
+                                                <div *ngIf="submitted && g['university'].errors" class="invalid-feedback">
+                                                    <div>University is required</div>
+                                                </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputMobile" class="form-label">Mobile Number</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['mobile'].errors }" type="number" formControlName="mobile" class="form-control" />
+                                                <div *ngIf="submitted && g['mobile'].errors" class="invalid-feedback">
+                                                    <div>Mobile Number is required</div>
+                                                </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="studyField" class="form-label">Study Field</label>
+                                        <input [ngClass]="{ 'is-invalid': submitted && g['studyField'].errors }" type="text" formControlName="studyField" class="form-control" />
+                                        <div *ngIf="submitted && g['studyField'].errors" class="invalid-feedback">
+                                            <div>Study Field is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input [ngClass]="{ 'is-invalid': submitted && g['password'].errors }" type="password" formControlName="password" class="form-control" />
+                                        <div *ngIf="submitted && g['password'].errors" class="invalid-feedback">
+                                            <div>Password is required</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Sign Up</button>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                                        <a class="text-primary fw-bold ms-2" routerLink="/login">Sign In</a>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Teacher Registration Form -->
+                           
+                               
+                                    <div class="tab-pane" id="TEACHER" [ngClass]="{ 'active': activeTab === 'TEACHER' }">
+                                        <form [formGroup]="registerFormTeacher" (ngSubmit)="onSubmitTeacher()">
+                                            <div class="mb-3">
+                                                <label for="exampleInputtext1" class="form-label">Name</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['username'].errors }" type="text" class="form-control" formControlName="username" />
+                                                <div *ngIf="submitted && g['username'].errors" class="invalid-feedback">
+                                                    <div>First Name is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Email</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['email'].errors }" type="email" formControlName="email" class="form-control" />
+                                                <div *ngIf="submitted && g['email'].errors" class="invalid-feedback">
+                                                    <div>Email is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputGender" class="form-label">Gender</label>
+                                                <select [ngClass]="{ 'is-invalid': submitted && g['gender'].errors }" type="text" formControlName="gender" class="form-control" >
+                                                
+                                                    <option value="Female">Female</option>
+                                                    <option value="Male">Male</option>
+                                                </select>
+                                                <div *ngIf="submitted && g['gender'].errors" class="invalid-feedback">
+                                                    <div>Gender is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="exampleInputAddress" class="form-label">Address</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['address'].errors }" type="text" formControlName="address" class="form-control" />
+                                                <div *ngIf="submitted && g['address'].errors" class="invalid-feedback">
+                                                    <div>Address is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="exampleInputUniversity" class="form-label">University</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['university'].errors }" type="text" formControlName="university" class="form-control" />
+                                                <div *ngIf="submitted && g['university'].errors" class="invalid-feedback">
+                                                    <div>University is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="exampleInputMobile" class="form-label">Mobile Number</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['mobile'].errors }" type="number" formControlName="mobile" class="form-control" />
+                                                <div *ngIf="submitted && g['mobile'].errors" class="invalid-feedback">
+                                                    <div>Mobile Number is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="exampleInputStudyField" class="form-label">Department</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['department'].errors }" type="text" formControlName="department" class="form-control" />
+                                                <div *ngIf="submitted && g['department'].errors" class="invalid-feedback">
+                                                    <div>Department is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="exampleInputPassword" class="form-label">Password</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['password'].errors }" type="password" formControlName="password" class="form-control" />
+                                                <div *ngIf="submitted && g['password'].errors" class="invalid-feedback">
+                                                    <div>Password is required</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="exampleInputPassword" class="form-label">Domain</label>
+                                                <input [ngClass]="{ 'is-invalid': submitted && g['domain'].errors }" type="domain" formControlName="domain" class="form-control" />
+                                                <div *ngIf="submitted && g['domain'].errors" class="invalid-feedback">
+                                                    <div>Domain is required</div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Sign Up</button>
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                                                <a class="text-primary fw-bold ms-2" routerLink="/login">Sign In</a>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -209,13 +191,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script src="/./assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="/./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 
 </html>

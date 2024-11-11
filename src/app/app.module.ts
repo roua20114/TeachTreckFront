@@ -75,6 +75,8 @@ import { HeaderStudentComponent } from './header-student/header-student.componen
 import { ExamStudentListComponent } from './exam-student-list/exam-student-list.component';
 import { AnswerStudentComponent } from './answer-student/answer-student.component';
 import { ExamEvaluateComponent } from './exam-evaluate/exam-evaluate.component';
+import { StudentHeaderBarComponent } from './student-header-bar/student-header-bar.component';
+import { UpdateStudentProfileComponent } from './update-student-profile/update-student-profile.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +133,8 @@ import { ExamEvaluateComponent } from './exam-evaluate/exam-evaluate.component';
     ExamStudentListComponent,
     AnswerStudentComponent,
     ExamEvaluateComponent,
+    StudentHeaderBarComponent,
+    UpdateStudentProfileComponent,
     
     
   ],

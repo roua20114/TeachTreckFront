@@ -176,13 +176,11 @@
                   <div class="col-md-6">
                     
                     <div class="media">
-                      <label>Age</label>
-                      <p>22 Yr</p>
+                      <label>University </label>
+                      <p>{{profileinfo.university}}</p>
                     </div>
-                    <div class="media">
-                      <label>Residence</label>
-                      <p>Canada</p>
-                    </div>
+                    
+                   
                     <div class="media">
                       <label>Address</label>
                       <p>{{profileinfo.address}}</p>
@@ -206,7 +204,7 @@
             <div class="col-lg-6">
               <div class="about-avatar">
                
-                <img *ngIf="profileinfo.ProfilePictureUrl" [src]="profileinfo.ProfilePictureUrl" title="Profile Picture" alt="Profile Picture">
+                <img [src]="profilePictureUrl" alt="Profile Picture" *ngIf="profilePictureUrl" class="profile-picture" />
 
                
                 <p *ngIf="!profilePictureUrl">No profile picture available</p>

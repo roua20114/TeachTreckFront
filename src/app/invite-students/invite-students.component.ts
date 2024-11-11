@@ -63,9 +63,6 @@ export class InviteStudentsComponent implements OnInit {
             (response) => {
               this.message = 'Pupil added successfully!';
               this.dialogRef.close(); // Close dialog after success
-            },
-            (error) => {
-              this.message = 'Failed to add pupil: ' + error.error;
             }
           );
       } else {

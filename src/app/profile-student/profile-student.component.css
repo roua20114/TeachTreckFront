@@ -1,0 +1,8 @@
+.profile-picture {
+    width: 600px; /* Set the width */
+    height: 600px; /* Set the height to match, creating a square */
+    border-radius: 50%; /* Make the picture circular */
+    object-fit: cover; /* Ensures the image fits nicely in the circle */
+    border: 2px solid #ddd; /* Optional: Add a border */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  }

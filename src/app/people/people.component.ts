@@ -6,6 +6,8 @@ import { ClassroomService } from '../Service/classroom.service';
 import { Classroom } from '../Models/classroom';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteStudentsComponent } from '../invite-students/invite-students.component';
+import { TeacherService } from '../Service/teacher.service';
+import { ApprovedJoinRequest } from '../approved-join-request';
 
 @Component({
   selector: 'app-people',
@@ -22,10 +24,17 @@ export class PeopleComponent implements OnInit {
   isLoading = true;
   errorMessage = '';
   successMessage = '';
+  studentId:any;
+  approvedClassrooms: Classroom[] = [];
+  approvedJoinRequests: ApprovedJoinRequest[] = [];
+  approvedStudentEmails: string[] = [];
+
+
+
 
   constructor(private authenticationService: AuthService,
     private router: Router, private route: ActivatedRoute,public dialog: MatDialog,
-    private classroomService: ClassroomService) {  this.route.params.subscribe((params) => {
+    private classroomService: ClassroomService, private teacherService: TeacherService) {  this.route.params.subscribe((params) => {
       this.classroomId = params['classroomId'];
     }); 
      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
@@ -55,21 +64,43 @@ export class PeopleComponent implements OnInit {
       this.isLoading = false;
     }
     this.loadStudents();
+    this.fetchApprovedStudentEmails(this.classroomId);
+    
+  }
+  fetchApprovedStudentEmails(classroomId: string): void {
+    this.teacherService.getApprovedStudentEmails(classroomId).subscribe(
+      (emails: string[]) => {
+        this.approvedStudentEmails = emails;
+      },
+      (error) => {
+        console.error('Error fetching approved student emails', error);
+      }
+    );
+  }
+  
+  fetchApprovedJoinRequests(): void {
+    this.teacherService.getAllApprovedJoinRequestsWithStudentEmails().subscribe(
+      (requests: ApprovedJoinRequest[]) => {
+        this.approvedJoinRequests = requests;
+      },
+      (error) => {
+        console.error('Error fetching approved join requests', error);
+      }
+    );
   }
   loadStudents(): void {
-    this.isLoading = true;
-    this.classroomService.getStudentsInClassroom(this.classroomId).subscribe({
-      next: (data) => {
-        this.students = data;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to load students. Please try again later.';
-        this.isLoading = false;
-        console.error(err);
-      }
-    });
+    if (this.classroomId) {
+      this.classroomService.getStudentsInClassroom(this.classroomId).subscribe(
+        (students) => {
+          this.students = students;
+        },
+        (error) => {
+          console.error('Error fetching students:', error);
+        }
+      );
+    }
   }
+  
   deleteStudent(email: string): void {
     this.classroomService.deleteStudentFromClassroom(this.classroomId, email).subscribe({
       next: (response) => {

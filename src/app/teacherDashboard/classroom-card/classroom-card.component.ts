@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Classroom } from 'src/app/Models/classroom';
+import { AuthService } from 'src/app/Service/auth.service';
 import { ClassroomService } from 'src/app/Service/classroom.service';
 import Swal from 'sweetalert2';
 
@@ -14,10 +15,12 @@ export class ClassroomCardComponent implements OnInit {
   classrooms: Classroom[] = [];
   classroom: any[] = [];
   classroomId: any;
+  userId:any;
 
-  constructor(private classroomService: ClassroomService) {}
+  constructor(private classroomService: ClassroomService,private authenticationService:AuthService) {}
 
   ngOnInit() {
+    this.userId = this.authenticationService.getCurrentUserId();
     this.classroomService.getMyClassrooms().subscribe(
       response => {
         this.classrooms = response;

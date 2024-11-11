@@ -1,10 +1,26 @@
-<div class="container">
-  <h2>Edit Classroom Name</h2>
-  <form (ngSubmit)="saveClassroomName()">
-    <div class="form-group">
-      <label for="name">New Classroom Name:</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="classroomName" name="name" required>
+<app-sidebar></app-sidebar>
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <app-header-admin></app-header-admin>
+
+    <div class="container-fluid my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="card shadow-sm p-4">
+            <h2 class="mb-4 text-center">Edit Classroom Name</h2>
+            <form (ngSubmit)="saveClassroomName()">
+              <div class="form-group mb-3">
+                <label for="name" class="form-label">New Classroom Name:</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name" placeholder="Enter new classroom name" required>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-block">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
+  </div>
 </div>

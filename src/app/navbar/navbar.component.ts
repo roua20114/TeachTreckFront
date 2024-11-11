@@ -8,9 +8,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   classroomId: any;
+  teacherId:any;
 
   constructor(private router: Router, private route: ActivatedRoute,) { 
     this.classroomId = this.route.snapshot.paramMap.get('id')!;
+    this.teacherId=this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {

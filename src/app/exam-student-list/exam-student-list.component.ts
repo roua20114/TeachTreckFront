@@ -16,6 +16,7 @@ export class ExamStudentListComponent implements OnInit {
   answers = {};
   classroomId:any
   examId:any
+  studentId:any;
 
   constructor(private studentService: StudentService, private route:ActivatedRoute) { }
  
@@ -23,6 +24,7 @@ export class ExamStudentListComponent implements OnInit {
   ngOnInit(): void {
     this.classroomId = this.route.snapshot.paramMap.get('classroomId');
     this.examId=this.route.snapshot.paramMap.get('examId');
+    this.studentId=this.route.snapshot.paramMap.get('id');
     
    
       this.studentService.getExamsByClassroom(this.classroomId).subscribe(

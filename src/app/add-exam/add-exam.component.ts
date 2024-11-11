@@ -20,7 +20,7 @@ export class AddExamComponent implements OnInit {
   exam = { title: '', description: '', domaine: ''};
 
 
-  constructor( private examService: TeacherService, private route:ActivatedRoute) {
+  constructor( private examService: TeacherService, private route:ActivatedRoute,private router: Router,) {
     
   }
 
@@ -35,6 +35,7 @@ export class AddExamComponent implements OnInit {
     this.examService.createExam(this.exam,this.classroomId).subscribe(response => {
       console.log('Exam created:', response);
       Swal.fire('Success','Exam added successfully','success')
+      this.router.navigate(['/classroomWall',this.classroomId])
     });
   }
 

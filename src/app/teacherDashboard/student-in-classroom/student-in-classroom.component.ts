@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ClassroomService } from 'src/app/Service/classroom.service';
 
 
@@ -10,17 +11,19 @@ import { ClassroomService } from 'src/app/Service/classroom.service';
 export class StudentInClassroomComponent implements OnInit {
 
   classroomCode!: string;
+  classroomId:any;
   students: string[] = [];
 
-  constructor(private classroomService: ClassroomService) {}
+  constructor(private classroomService: ClassroomService,private route: ActivatedRoute) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.classroomId = this.route.snapshot.paramMap.get('classroomId');
+   
   }
 
   getStudents() {
-    this.classroomService.getStudentsInClassroom(this.classroomCode).subscribe(
-      response => {
-        this.students = response;
+    this.classroomService.getStudentsInClassroom(this.classroomId).subscribe(
+      (students) => {
+        this.students = students;
       },
       error => {
         console.error('Error fetching students', error);
