@@ -77,6 +77,7 @@ import { AnswerStudentComponent } from './answer-student/answer-student.componen
 import { ExamEvaluateComponent } from './exam-evaluate/exam-evaluate.component';
 import { StudentHeaderBarComponent } from './student-header-bar/student-header-bar.component';
 import { UpdateStudentProfileComponent } from './update-student-profile/update-student-profile.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { UpdateStudentProfileComponent } from './update-student-profile/update-s
     ExamEvaluateComponent,
     StudentHeaderBarComponent,
     UpdateStudentProfileComponent,
+    ChatComponent,
     
     
   ],
@@ -153,7 +155,7 @@ import { UpdateStudentProfileComponent } from './update-student-profile/update-s
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
    
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],

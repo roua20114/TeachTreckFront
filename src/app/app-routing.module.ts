@@ -47,6 +47,7 @@ import { ProfileStudentComponent } from './profile-student/profile-student.compo
 import { ExamStudentListComponent } from './exam-student-list/exam-student-list.component';
 import { AnswerStudentComponent } from './answer-student/answer-student.component';
 import { UpdateStudentProfileComponent } from './update-student-profile/update-student-profile.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -87,6 +88,7 @@ const routes: Routes = [
       { path: 'classroomstudent/:classroomId', component: ClassroomWallStudentComponent},
       { path: 'peoplelist/:classroomId', component:PeopleListStudntComponent},
       { path:'profilestudent/:id' , component:ProfileStudentComponent},
+      { path: 'messages', component: ChatComponent },
 
      
 
